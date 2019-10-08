@@ -267,6 +267,7 @@ struct binder_node {
 	};
 	bool has_async_transaction;
 	struct list_head async_todo;
+	char context_name[BINDERFS_MAX_NAME + 1];
 };
 
 struct binder_ref_death {
