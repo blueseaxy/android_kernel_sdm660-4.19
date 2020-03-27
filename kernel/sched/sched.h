@@ -973,9 +973,10 @@ struct rq {
 	unsigned long		last_load_update_tick;
 	unsigned long		last_blocked_load_update_tick;
 	unsigned int		has_blocked_load;
+	call_single_data_t	nohz_csd;
 #endif /* CONFIG_SMP */
 	unsigned int		nohz_tick_stopped;
-	atomic_t nohz_flags;
+	atomic_t		nohz_flags;
 #endif /* CONFIG_NO_HZ_COMMON */
 
 	/* capture load from *all* tasks on this CPU: */
@@ -1064,7 +1065,7 @@ struct rq {
 
 	/* This is used to determine avg_idle's max value */
 	u64			max_idle_balance_cost;
-#endif
+#endif /* CONFIG_SMP */
 
 #ifdef CONFIG_SCHED_WALT
 	struct sched_cluster	*cluster;
@@ -1144,6 +1145,7 @@ struct rq {
 #ifdef CONFIG_SMP
 	struct llist_head	wake_list;
 #endif
+        call_single_data_t      wake_csd;
 
 #ifdef CONFIG_CPU_IDLE
 	/* Must be inspected within a rcu lock section */
