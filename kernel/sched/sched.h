@@ -2290,6 +2290,10 @@ static inline unsigned long __cpu_util(int cpu)
 	return min_t(unsigned long, util, capacity_orig_of(cpu));
 }
 
+static bool sched_energy_enabled(void){
+	return true;
+}
+
 static inline unsigned long cpu_util_cum(int cpu, int delta)
 {
 	u64 util = cpu_rq(cpu)->cfs.avg.util_avg;
